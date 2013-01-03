@@ -46,7 +46,7 @@ class AreaForm(forms.ModelForm):
 
 class AreaFormForInline(forms.ModelForm):
     class Meta:
-        model = models.Located
+        model = get_model('coop_local', 'Located')
         fields = ('location',)  # TODO ça fout le oaï que ça s'appelle location on comprend plus rien
         widgets = {
             'location': widgets.ChooseAreaWidget(),

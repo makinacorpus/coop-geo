@@ -59,7 +59,7 @@ class AreaAdmin(FkAutocompleteAdmin):  # FkAutocompleteAdmin too but...
 class LocatedInline(GenericTabularInline, InlineAutocompleteAdmin):
     verbose_name = _(u'Place')
     verbose_name_plural = _(u'Places')
-    model = models.Located
+    model = get_model('coop_local', 'Located')
     related_search_fields = {'location': ('label', 'adr1', 'adr2', 'zipcode', 'city'), }
     extra = 1
 

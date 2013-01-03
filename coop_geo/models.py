@@ -232,6 +232,8 @@ class Located(models.Model):
     class Meta:
         verbose_name = _(u'Located item')
         verbose_name_plural = _(u'Located items')
+        abstract = True
+        app_label = 'coop_local'
 
 
     def geoJson(self):
