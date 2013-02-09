@@ -3,18 +3,20 @@
 
 from django.contrib import admin
 from django.utils.translation import ugettext_lazy as _
-from coop.utils.autocomplete_admin import InlineAutocompleteAdmin
-from django.contrib.contenttypes.generic import GenericTabularInline
-from coop.utils.autocomplete_admin import FkAutocompleteAdmin
+from coop.utils.autocomplete_admin import FkAutocompleteAdmin, InlineAutocompleteAdmin, GenericInlineAutocompleteAdmin
 from django.db.models.loading import get_model
 
 import models
 import forms
 
-admin.site.register(models.LocationCategory)
+
+class LocationCategoryAdmin(FkAutocompleteAdmin):
+    pass
+
+admin.site.register(models.LocationCategory, LocationCategoryAdmin)
 
 
-class LocationAdmin(admin.ModelAdmin):
+class LocationAdmin(FkAutocompleteAdmin):
     list_display = ['label', 'adr1', 'adr2', 'zipcode', 'city', 'has_point']
     list_display_links = ['label', 'adr1', 'adr2']
     search_fields = ['label', 'adr1', 'adr2', 'zipcode', 'city']
@@ -22,12 +24,12 @@ class LocationAdmin(admin.ModelAdmin):
 # admin.site.register(models.Location, LocationAdmin)
 
 
-class AreaTypeAdmin(admin.ModelAdmin):
+class AreaTypeAdmin(FkAutocompleteAdmin):
     list_display = ['label', ]
 admin.site.register(models.AreaType, AreaTypeAdmin)
 
 
-class AreaParentRelInline(admin.TabularInline):
+class AreaParentRelInline(InlineAutocompleteAdmin):
     model = models.AreaRelations
     verbose_name = _(u"Included area")
     verbose_name_plural = _(u"Included areas")
@@ -56,7 +58,7 @@ class AreaAdmin(FkAutocompleteAdmin):  # FkAutocompleteAdmin too but...
 # admin.site.register(models.Area, AreaAdmin)
 
 
-class LocatedInline(GenericTabularInline, InlineAutocompleteAdmin):
+class LocatedInline(GenericInlineAutocompleteAdmin):
     verbose_name = _(u'Place')
     verbose_name_plural = _(u'Places')
     model = get_model('coop_local', 'Located')
@@ -64,7 +66,7 @@ class LocatedInline(GenericTabularInline, InlineAutocompleteAdmin):
     extra = 1
 
 
-class AreaInline(GenericTabularInline):
+class AreaInline(GenericInlineAutocompleteAdmin):
     form = forms.AreaFormForInline
     verbose_name = _(u'Impact area')
     verbose_name_plural = _(u'Impact areas')

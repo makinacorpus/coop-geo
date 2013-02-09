@@ -9,8 +9,6 @@ from django.utils import translation
 from django.utils.safestring import mark_safe
 from django.core.exceptions import ObjectDoesNotExist
 
-from coop.utils.autocomplete_admin import FkSearchInput
-
 import floppyforms.gis as ff_gis
 
 from models import AreaType
