@@ -225,6 +225,7 @@ class Located(models.Model):
     content_type = models.ForeignKey(ContentType, blank=True, null=True)
     object_id = models.PositiveIntegerField()
     content_object = generic.GenericForeignKey('content_type', 'object_id')
+    opening = models.CharField(_(u'opening days and hours'), blank=True, max_length=200)
 
     def __unicode__(self):
         return unicode(self.content_object) + u" @ " + unicode(self.location)
