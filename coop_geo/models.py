@@ -70,9 +70,6 @@ class Location(URIModel):
         abstract = True
         app_label = 'coop_local'
 
-
-
-
     def __unicode__(self):
         lbl = self.label
         extra = []
@@ -84,6 +81,17 @@ class Location(URIModel):
             lbl = u"%s (%s)" % (lbl, u", ".join(extra))
         return lbl
 
+    def get_full_address(self):
+        lbl = self.label
+        extra = []
+        if self.adr1 != self.label:
+            extra = [self.adr1]
+        extra += [getattr(self, attr) for attr in ['adr2', 'zipcode', 'city']
+                                                       if getattr(self, attr)]
+        if extra:
+            lbl = u"%s, %s" % (lbl, u", ".join(extra))
+        return lbl
+        
     def has_point(self):
         return self.point != None
     has_point.boolean = True
