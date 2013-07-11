@@ -40,7 +40,32 @@ class LocationPointWidget(ff_gis.PointWidget, ff_gis.BaseOsmWidget):
     #     context['areas'] = Area.get_all()
     #     return context
 
+class LocationPointWidgetInline(ff_gis.PointWidget, ff_gis.BaseOsmWidget):
+    template_name = 'gis/osm_location_inline.html'
+    map_width = 400
+    point_zoom = 18
+    geocode_region = settings.COOP_GEO_REGION
+    geocode_bounding = settings.COOP_GEO_BOUNDING_BOX
 
+
+    class Media:
+        extend = False
+        js = ('http://maps.google.com/maps/api/js?sensor=false',
+              'js/OpenLayers.js',
+              'js/gis/OpenStreetMap.js',
+              'js/MapWidget.js',)
+        css = {'all': ['css/smoothness/jquery-ui-1.8.14.custom.css', # on l'a déjà aussi dans Bootstrap --> if...
+                       'css/openlayers.css']}
+
+    map_attrs = list(ff_gis.BaseOsmWidget.map_attrs) + \
+                ['geocode_region', 'geocode_bounding', 'point_zoom']
+
+    # def get_context_data(self):
+    #     context = super(LocationPointWidget, self).get_context_data()
+    #     context['areas'] = Area.get_all()
+    #     return context
+    
+    
 class ChooseLocationWidget(ff_gis.PointWidget, ff_gis.BaseOsmWidget):
     template_name = 'gis/osm_choose_location.html'
     map_width = 400
