@@ -106,17 +106,12 @@ var {{attrs.id|varformat}}_areas = new Array();
     var {{attrs.id|varformat}}_area_id = {{module}}.options.id.replace('point', 'area');
     /* initialize area */
     jQuery(function() {
-//         alert({{attrs.id|varformat}}_area_id);
-//         id_located-0-area
-        //var area_value = document.getElementById("id_located-0-point").value;
         var area_value = document.getElementById("{{attrs.id}}").value;
-
         //var area_value = document.getElementById({{attrs.id|varformat}}_area_id).value;
         //var area_value = document.getElementById("{{attrs.id}}_area_id").value;
         //var area_value = document.getElementById({{attrs.id}}.value;
         //id_located-0-point
         //alert(area_value);
-
         /*
         if (area_value){
             for (idx in {{attrs.id|varformat}}_area_ids){
