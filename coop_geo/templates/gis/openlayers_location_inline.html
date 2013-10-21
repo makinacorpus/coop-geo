@@ -1,4 +1,4 @@
-{% load i18n %}
+{% load i18n staticfiles %}
 {% load mkrange %}
 {% load varformat %}
 <style type="text/css">
@@ -8,11 +8,11 @@
     #{{ attrs.id }}_span_control {width:400px; height:{{result_height}}px;}
     {% if not display_wkt %}#{{ attrs.id }} { display: none; }{% endif %}
     .olControlEditingToolbar .olControlModifyFeatureItemActive {
-        background-image: url("{{ STATIC_URL }}admin/img/gis/move_vertex_on.png");
+        background-image: url("{% static 'admin/img/gis/move_vertex_on.png' %}");
         background-repeat: no-repeat;
     }
     .olControlEditingToolbar .olControlModifyFeatureItemInactive {
-        background-image: url("{{ STATIC_URL }}admin/img/gis/move_vertex_off.png");
+        background-image: url("{% static 'admin/img/gis/move_vertex_off.png' %}");
         background-repeat: no-repeat;
     }
     .address_results{
