@@ -22,7 +22,7 @@ class Command(BaseCommand):
     def _get_area_type(self, mnemonic):
         if not hasattr(self, 'area_type'):
             self.area_type = {}
-            for k, lbl in (('DEP', u'Départment'),
+            for k, lbl in (('DEP', u'Département'),
                            ('CAN', u'Canton'),
                            ('COM', u'Ville'),
                            ('REG', u'Région')):
